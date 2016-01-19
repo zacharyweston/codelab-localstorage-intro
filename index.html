@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <title>Online Games</title>
+      <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+      <button type="button" onclick="alertMe()" id="modeButton">Change view mode</button>
+
+      <script>
+            var viewMode = localStorage.getItem('viewMode')
+
+            if (viewMode === "nightMode") {
+            document.body.className = 'nightModeClass'
+            alert("Test: Night Mode Enabled");
+
+            else {
+            document.body.className = 'dayModeClass'
+            alert("Test: Day Mode Enabled");
+            }
+
+            document.getElementById("modeButton").onclick = function() {alertMe()};
+
+            function alertMe () {
+              alert("Button clicked successfully");
+            }
+
+            function changeToNight () {
+            alert("Button clicked changeToNight");
+            localStorage.setItem('viewMode', nightMode)
+            document.getElementById( "modeButton" ).setAttribute( "onClick", "javascript: changeToDay();" );
+            location.reload();
+            }
+            function changeToDay () {
+            alert("Button clicked changeToDay");
+            localStorage.setItem('viewMode', dayMode)
+            document.getElementById( "modeButton" ).setAttribute( "onClick", "javascript: changeToNight();" );
+            location.reload();
+            }
+
+          </script>
+
+      <header>
+        <h1>Join a Game</h1>
+      </header>
+      <div class="container">
+        <main>
+          <div>
+            <p class="columns2">We have many games of different genres. Search for a game that you want to become a part of, and apply to join.</p>
+          </div>
+        </main>
+        <aside class="sidebar">
+          <form>
+            <input type="text" name="Search" placeholder="Search games" size="45">
+          </form>
+        </aside>
+      </div><!--container div -->
+      <hr>
+      <div>
+        <h1>Top Games</h1>
+        <div class="game-gallery">
+          <div class="game-container">
+            <img src="http://lorempixel.com/300/200/cats" alt="Cat">
+            <h3>Star Trek: Armada</h3>
+            <p>Members: 13<br>Last Post: 2:30PM</p>
+          </div>
+          <div class="game-container">
+            <img src="http://lorempixel.com/300/200/cats" alt="Cat">
+            <h3>The Wire</h3>
+            <p>Members: 13<br>Last Post: 2:30PM</p>
+          </div>
+          <div class="game-container">
+            <img src="http://lorempixel.com/300/200/cats" alt="Cat">
+            <h3>UFC Warriors</h3>
+            <p>Members: 13<br>Last Post: 2:30PM</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1>Create A Game</h1>
+        <p>You can create any type of text-based role-playing game that you'd like. All you have to do is think of a subject, and follow the steps to create your game. We will help you:</p>
+        <div class="row">
+          <div class="column" >
+            <ul>
+              <li>Create your game</li>
+              <li>Pick a category</li>
+              <li>Create your own character</li>
+              <li>Create the character groups</li>
+              <li>Invite members</li>
+            </ul>
+          </div>
+          <div class="column">
+            <button type="button"><br><span class="buttonStrong">Create Your Own Game</span><br><span class="buttonMain">You're on your way to becoming a GM</span><br><br></button>
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
