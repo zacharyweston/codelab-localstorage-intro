@@ -5,41 +5,34 @@
       <link href="style.css" rel="stylesheet">
     </head>
     <body>
-      <button type="button" onclick="alertMe()" id="modeButton">Change view mode</button>
-
+      <button type="button" id="modeButton">Change view mode</button>
+      <p>You have visited this site: <span id='visitCount'>1</span> times</p>
       <script>
-            var viewMode = localStorage.getItem('viewMode')
+        localStorage.setItem('visits', '1')
+        var myVisits = parseInt ( localStorage.getItem('visits'))
+        var visitCounting = myVisits + 1
+        localStorage.setItem('visits', 'VisitCounting')
+        var counterNumber = localStorage.getItem('visits')
+        document.getElementById('visitCount').innerHTML = counterNumber
 
-            if (viewMode === "nightMode") {
-            document.body.className = 'nightModeClass'
-            alert("Test: Night Mode Enabled");
-
-            else {
-            document.body.className = 'dayModeClass'
-            alert("Test: Day Mode Enabled");
-            }
-
-            document.getElementById("modeButton").onclick = function() {alertMe()};
-
-            function alertMe () {
-              alert("Button clicked successfully");
-            }
-
-            function changeToNight () {
-            alert("Button clicked changeToNight");
-            localStorage.setItem('viewMode', nightMode)
-            document.getElementById( "modeButton" ).setAttribute( "onClick", "javascript: changeToDay();" );
-            location.reload();
-            }
-            function changeToDay () {
-            alert("Button clicked changeToDay");
-            localStorage.setItem('viewMode', dayMode)
-            document.getElementById( "modeButton" ).setAttribute( "onClick", "javascript: changeToNight();" );
-            location.reload();
-            }
-
-          </script>
-
+        var viewSelect = localStorage.getItem('viewMode');
+        if (viewSelect === 'dayMode') {
+          document.body.className = 'dayModeClass';
+        }
+        else  if (viewSelect === 'nightMode') {
+          document.body.className = 'nightModeClass'
+        }
+        document.getElementById("modeButton").onclick = function() {toggleView()};
+        function toggleView () {
+          if (viewSelect === 'dayMode') {
+            localStorage.setItem('viewMode', 'nightMode');
+          }
+          else  if (viewSelect === 'nightMode'){
+            localStorage.setItem('viewMode', 'dayMode');
+          }
+          location.reload();
+        }
+        </script>
       <header>
         <h1>Join a Game</h1>
       </header>
