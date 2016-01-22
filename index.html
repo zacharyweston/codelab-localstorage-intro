@@ -4,17 +4,22 @@
       <title>Online Games</title>
       <link href="style.css" rel="stylesheet">
     </head>
-    <body>
+    <body onload="countVisits()">
       <button type="button" id="modeButton">Change view mode</button>
       <p>You have visited this site: <span id='visitCount'>1</span> times</p>
       <script>
-        localStorage.setItem('visits', '1')
-        var myVisits = parseInt ( localStorage.getItem('visits'))
-        var visitCounting = myVisits + 1
-        localStorage.setItem('visits', 'VisitCounting')
-        var counterNumber = localStorage.getItem('visits')
-        document.getElementById('visitCount').innerHTML = counterNumber
-
+      function countVisits(){
+          storedCount = localStorage.getItem("count");
+          if (storedCount == null || storedCount == "null"){
+            count = 0;
+          } else {
+            count = parseInt(storedCount);
+          }
+          count++;
+          Counter = document.getElementById("visitCount");
+          Counter.innerHTML = count;
+          localStorage.setItem("count", count);
+        }
         var viewSelect = localStorage.getItem('viewMode');
         if (viewSelect === 'dayMode') {
           document.body.className = 'dayModeClass';
