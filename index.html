@@ -4,42 +4,79 @@
       <title>Online Games</title>
       <link href="style.css" rel="stylesheet">
     </head>
-    <body onload="countVisits()">
+    <body>
       <button type="button" id="modeButton">Change view mode</button>
       <p>You have visited this site: <span id='visitCount'>1</span> times</p>
       <script>
-      function countVisits(){
-          storedCount = localStorage.getItem("count");
-          if (storedCount == null || storedCount == "null"){
-            count = 0;
-          } else {
-            count = parseInt(storedCount);
-          }
-          count++;
-          Counter = document.getElementById("visitCount");
-          Counter.innerHTML = count;
-          localStorage.setItem("count", count);
+        function countVisits () {
+          storedCount = localStorage.getItem('count');
+
+          // Renamed `count` to `newCount` for more explicit naming and
+          // also using a ternary for a shorter if statement.
+          var newCount = storedCount === null ? 1 : parseInt(storedCount) + 1;
+
+          // Renamed `Counter` to `count`, as variable names should always
+          // begin with a lower case letter.
+          var counter = document.getElementById('visitCount');
+          counter.innerHTML = newCount;
+
+          localStorage.setItem('count', newCount);
         }
-        var viewSelect = localStorage.getItem('viewMode');
-        if (viewSelect === 'dayMode') {
-          document.body.className = 'dayModeClass';
+        // Calling `countVisits` right after I declare it so that it runs when the page loads
+        countVisits()
+
+        function updateView() {
+          var viewSelect = localStorage.getItem('viewMode');
+          // Setting the body class to `viewSelect` - or, if there is no value in `viewSelect` -
+          // then to the string `'day'`, which will be our default view mode.
+          document.body.className = viewSelect || 'day';
         }
-        else  if (viewSelect === 'nightMode') {
-          document.body.className = 'nightModeClass'
-        }
-        document.getElementById("modeButton").onclick = function() {toggleView()};
+        // Calling `updateView` right after I declare it so that it runs when the page loads
+        updateView()
+
         function toggleView () {
-          if (viewSelect === 'dayMode') {
-            localStorage.setItem('viewMode', 'nightMode');
-          }
-          else  if (viewSelect === 'nightMode'){
-            localStorage.setItem('viewMode', 'dayMode');
-          }
-          else {
-            localStorage.setItem('viewMode', 'nightMode');
-          }
-          location.reload();
+          // Getting the mode based on the body, again using a ternary for a shorter `if-else`.
+          var newMode = document.body.className === 'night' ? 'day' : 'night';
+          localStorage.setItem('viewMode', newMode);
+          // Updating the view instead of refreshing the page, because that messing with the
+          // visit counter and also is less instantaneous.
+          updateView()
         }
+
+        document.getElementById('modeButton').onclick = function () {
+          // Just toggling the view when the button is clicked.
+          toggleView()
+          console.log('Test')
+        };
+
+      // Old, inelegant code
+      // function countVisits(){
+      //     storedCount = localStorage.getItem("count");
+      //     if (storedCount == null || storedCount == "null"){
+      //       count = 0;
+      //     }
+      //     else {
+      //       count = parseInt(storedCount);
+      //     }
+      //     count++;
+      //     Counter = document.getElementById("visitCount");
+      //     Counter.innerHTML = count;
+      //     localStorage.setItem("count", count);
+      //   }
+      //   countVisits()
+      //   var viewSelect = localStorage.getItem('viewMode');
+      //   document.body.className = viewSelect + 'Class';
+      //   document.body.className = viewSelect ? viewSelect + 'Class' : nightMode;
+      //   document.getElementById("modeButton").onclick = function() {toggleView()};
+      //   function toggleView () {
+      //     if (viewSelect === 'night'){
+      //       localStorage.setItem('viewMode', 'day');
+      //     }
+      //     else {
+      //       localStorage.setItem('viewMode', 'night');
+      //     }
+      //     location.reload();
+      //   }
         </script>
       <header>
         <h1>Join a Game</h1>

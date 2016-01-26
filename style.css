@@ -1,9 +1,9 @@
-.nightModeClass {
+.night {
   background-color: #202264;
   color: #feefea;
 }
 
-.dayModeClass {
+.day {
   background-color: #feeaf9;
   color: #532781;
 }
